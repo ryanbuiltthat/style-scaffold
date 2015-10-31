@@ -1,0 +1,74 @@
+---
+layout: default
+title: image cropping
+---
+
+{% highlight css %}
+// Size mixin
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+
+// Responsive images mixin
+@mixin responsive-image($position: null, $size: 320px, $radius: 0) {
+  @include size($size);
+  border-radius: $radius;
+  object-fit: cover;
+  object-position: $position;
+}
+{% endhighlight %}
+
+<hr>
+
+<h4>&lt;img&gt; tag wrapped in &lt;figure&gt;</h4>
+<figure>
+	<img src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+</figure>
+
+{% highlight html %}
+<figure>
+  <img src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+</figure>
+{% endhighlight %}
+
+<hr>
+
+<h4>&lt;img&gt; cropped to left portion</h4>
+<figure class="image-focus-left">
+<img src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+</figure>
+
+{% highlight html %}
+.image-focus-left {
+  @include responsive-image(left);
+}
+
+<img class="image-focus-left" src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+{% endhighlight %}
+
+<hr>
+
+<h4>&lt;img&gt; cropped to center, and circle radius</h4>
+<img class="image-focus-center" src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+
+{% highlight html %}
+.image-focus-center {
+  @include responsive-image($radius: 50%);
+}
+
+<img class="image-focus-center" src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+{% endhighlight %}
+
+<hr>
+
+<h4>&lt;img&gt; cropped to right, and 20% rounded radius</h4>
+<img class="image-focus-right" src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+
+{% highlight html %}
+.image-focus-right {
+  @include responsive-image(right, $radius: 20%);
+}
+
+<img class="image-focus-right" src="http://quattromani.github.io/scaffold/media/images/test-banner.jpg" alt="test banner">
+{% endhighlight %}
